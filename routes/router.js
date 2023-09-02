@@ -28,6 +28,19 @@ router.post('/item/create', item_controller.item_create_post);
 router.get('/brand/:id/delete', brand_controller.brand_delete_get);
 router.post('/brand/:id/delete', brand_controller.brand_delete_post);
 
+router.get('/category/:id/delete', category_controller.category_delete_get);
+router.post('/category/:id/delete', category_controller.category_delete_post);
+router.get(
+  '/instrument/:id/delete',
+  instrument_controller.instrument_delete_get
+);
+router.post(
+  '/instrument/:id/delete',
+  instrument_controller.instrument_delete_post
+);
+router.get('/item/:id/delete', item_controller.item_delete_get);
+router.post('/item/:id/delete', item_controller.item_delete_post);
+
 // Update
 router.get(
   '/instrument/:id/update',
