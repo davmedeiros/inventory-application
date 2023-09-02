@@ -44,12 +44,28 @@ const populateCategory = async () => {
   ]);
 };
 
+const createBrand = async (index, name, country) => {
+  const brand = new Brand({ name: name, country: country });
+  await brand.save();
+  brands[index] = brand;
+  console.log(`Added brand: ${name}`);
+};
+
+const populateBrand = async () => {
+  console.log('Adding brands');
+  await Promise.all([
+    createBrand(0, 'Yamaha', 'Japan'),
+    createBrand(1, 'Gibson', 'United States'),
+    createBrand(2, 'Hofner', 'Germany'),
+  ]);
+};
+
 const main = async () => {
   console.log('Debug: About to connect');
   await mongoose.connect(mongoDB);
   console.log('Debug: Should be connected?');
   await populateCategory();
-  // await createBrand();
+  await populateBrand();
   console.log('Debug: Closing mongoose');
   mongoose.connection.close();
 };
