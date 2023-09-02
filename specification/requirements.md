@@ -16,7 +16,7 @@
 
 ## Create forms
 
-- [ ] Create category.
-- [ ] Create brand.
+- [x] Create category.
+- [x] Create brand.
 - [ ] Create instrument.
 - [ ] Create inventory item.
