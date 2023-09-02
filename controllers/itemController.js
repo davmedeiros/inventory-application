@@ -15,7 +15,7 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
   const item = await Item.findById(req.params.id).populate('instrument').exec();
 
   if (item === null) {
-    const err = new Error('Book copy not found');
+    const err = new Error('instrument copy not found');
     err.status = 404;
     return next(err);
   }
@@ -56,7 +56,7 @@ exports.item_create_post = [
       res.render('item_form', {
         title: 'Create Item',
         instrument_list: allInstruments,
-        selected_instrument: item.book._id,
+        selected_instrument: item.instrument._id,
         errors: errors.array(),
         item: item,
       });
@@ -67,3 +67,20 @@ exports.item_create_post = [
     }
   }),
 ];
+
+exports.brand_delete_get = asyncHandler(async (req, res, next) => {
+  const [brand, allInstrumentsByBrand] = await Promise.all([
+    Brand.findById(req.params.id).exec(),
+    Instrument.find({ brand: req.params.id }, 'name description').exec(),
+  ]);
+
+  if (brand === null) {
+    res.redirect('/catalog/brands');
+  }
+
+  res.render('brand_delete', {
+    title: 'Delete Brand',
+    brand: brand,
+    brand_instruments: allInstrumentsByBrand,
+  });
+});
