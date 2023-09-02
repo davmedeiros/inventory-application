@@ -7,9 +7,11 @@ const userArgs = process.argv.slice(2);
 
 const Category = require('./models/category');
 const Brand = require('./models/brand');
+const Instrument = require('./models/instrument');
 
 const categories = [];
 const brands = [];
+const instruments = [];
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
@@ -60,12 +62,63 @@ const populateBrand = async () => {
   ]);
 };
 
+const createInstrument = async (
+  index,
+  name,
+  price,
+  brand,
+  description,
+  category
+) => {
+  const instrument = new Instrument({
+    name: name,
+    price: price,
+    brand: brand,
+    description: description,
+    category: category,
+  });
+  await instrument.save();
+  instruments[index] = instrument;
+  console.log(`Added instrument: ${name}`);
+};
+
+const populateInstrument = async () => {
+  console.log('Adding instruments');
+  await Promise.all([
+    createInstrument(
+      0,
+      'Guitar',
+      471.99,
+      brands[0],
+      'A classic guitar made of pine.',
+      categories[0]
+    ),
+    createInstrument(
+      1,
+      'Drum',
+      132.59,
+      brands[1],
+      'Handcrafted drum ornamented with tribal trinkets.',
+      categories[1]
+    ),
+    createInstrument(
+      2,
+      'Piano',
+      6042.0,
+      brands[2],
+      'Grand piano with high quality finishes.',
+      categories[2]
+    ),
+  ]);
+};
+
 const main = async () => {
   console.log('Debug: About to connect');
   await mongoose.connect(mongoDB);
   console.log('Debug: Should be connected?');
   await populateCategory();
   await populateBrand();
+  await populateInstrument();
   console.log('Debug: Closing mongoose');
   mongoose.connection.close();
 };
