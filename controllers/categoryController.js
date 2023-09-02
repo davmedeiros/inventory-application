@@ -78,7 +78,7 @@ exports.category_create_post = [
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
   const [category, allInstrumentsByCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
-    Instrument.find({ brand: req.params.id }, 'name description').exec(),
+    Instrument.find({ category: req.params.id }, 'name description').exec(),
   ]);
 
   if (category === null) {
@@ -95,7 +95,7 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
 exports.category_delete_post = asyncHandler(async (req, res, next) => {
   const [category, allInstrumentsByCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
-    Instrument.find({ brand: req.params.id }, 'name description').exec(),
+    Instrument.find({ category: req.params.id }, 'name description').exec(),
   ]);
 
   if (allInstrumentsByCategory.length > 0) {
