@@ -30,7 +30,7 @@
 
 ## Update
 
-- [ ] Delete category.
-- [ ] Delete brand.
-- [x] Delete instrument.
-- [ ] Delete inventory item.
+- [ ] Update category.
+- [ ] Update brand.
+- [x] Update instrument.
+- [ ] Update inventory item.
