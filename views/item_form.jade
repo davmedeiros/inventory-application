@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='instrument') Instrument:
+      select#instrument.form-control(type='select' placeholder='Select instrument' name='instrument' required='true')
+        - instrument_list.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        for instrument in instrument_list
+          option(value=instrument._id, selected=(selected_instrument==instrument._id.toString() ? 'selected' : false) ) #{instrument.name}
+
+    div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select' placeholder='Select status' name='status' required='true' )
+        option(value='Available' selected=(undefined===item || item.status!='Available' ? false:'selected')) Available
+        option(value='Reserved' selected=(undefined===item || item.status!='Reserved' ? false:'selected')) Reserved
+        option(value='Sold' selected=(undefined===item || item.status!='Sold' ? false:'selected')) Sold
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
