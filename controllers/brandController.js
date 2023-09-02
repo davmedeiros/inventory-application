@@ -118,7 +118,7 @@ exports.brand_update_get = asyncHandler(async (req, res, next) => {
 
   res.render('brand_form', {
     title: 'Update Brand',
-    category: brand,
+    brand: brand,
   });
 });
 
