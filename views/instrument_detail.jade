@@ -3,10 +3,10 @@ extends layout
 block content
   h1 Title: #{instrument.title}
 
-  p #[strong Brand:]
+  p #[strong Brand: ]
     a(href=instrument.brand.url) #{instrument.brand.name}
-  p #[strong Description:] #{instrument.description}
-  p #[strong Category:]
+  p #[strong Description: ] #{instrument.description}
+  p #[strong Category: ]
     a(href=instrument.category.url) #{instrument.category.name}
 
   div
@@ -20,7 +20,7 @@ block content
         p.text-danger #{item.status}
       else
         p.text-warning #{item.status}
-      p #[strong Id:]
+      p #[strong Id: ]
         a(href=item.url) #{item._id}
 
     else
