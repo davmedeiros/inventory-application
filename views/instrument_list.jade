@@ -2,6 +2,8 @@ extends layout
 
 block content 
   h1= title 
+  p 
+    a(href='/instrument/create') Add instrument 
   ul 
     each instrument in instrument_list
       li 

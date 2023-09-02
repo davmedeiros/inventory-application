@@ -19,6 +19,7 @@ router.get('/category/create', category_controller.category_create_get);
 router.post('/category/create', category_controller.category_create_post);
 router.get('/brand/create', brand_controller.brand_create_get);
 router.post('/brand/create', brand_controller.brand_create_post);
+router.get('/instrument/create', instrument_controller.instrument_create_get);
 
 // Detail views
 router.get('/category/:id', category_controller.category_detail);
