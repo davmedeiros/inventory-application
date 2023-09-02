@@ -75,7 +75,7 @@ exports.brand_delete_get = asyncHandler(async (req, res, next) => {
   ]);
 
   if (brand === null) {
-    res.redirect('/catalog/brands');
+    res.redirect('/brands');
   }
 
   res.render('brand_delete', {
