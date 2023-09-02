@@ -9,7 +9,7 @@
 
 ## Detail views
 
-- [ ] View category detail.
+- [x] View category detail.
 - [ ] View brand detail.
 - [ ] View instrument detail.
 - [ ] View inventory item detail.
