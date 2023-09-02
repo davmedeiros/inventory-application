@@ -105,7 +105,16 @@ exports.instrument_create_post = [
 ];
 
 exports.instrument_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Instrument delete GET');
+  const instrument = await Instrument.findById(req.params.id).exec();
+
+  if (instrument === null) {
+    res.redirect('/instruments');
+  }
+
+  res.render('instrument_delete', {
+    title: 'Delete Instrument',
+    instrument: instrument,
+  });
 });
 
 exports.instrument_delete_post = asyncHandler(async (req, res, next) => {
