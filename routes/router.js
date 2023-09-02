@@ -22,6 +22,7 @@ router.post('/brand/create', brand_controller.brand_create_post);
 router.get('/instrument/create', instrument_controller.instrument_create_get);
 router.post('/instrument/create', instrument_controller.instrument_create_post);
 router.get('/item/create', item_controller.item_create_get);
+router.post('/item/create', item_controller.item_create_post);
 
 // Detail views
 router.get('/category/:id', category_controller.category_detail);
