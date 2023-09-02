@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  h1 Brand: #{brand.name}
+  p #{brand.country}
+
+  div
+
+    h4 Instrument
+
+    dl
+      each instrument in category_instruments
+        dt
+          a(href=instrument.url) #{instrument.name}
+        dd #{instrument.description}
+
+      else
+        p This brand has no instruments.
+  hr
+  p
+    a(href=`${brand.url}/delete`) Delete brand
