@@ -25,7 +25,6 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Display BookInstance create form on GET.
 exports.item_create_get = asyncHandler(async (req, res, next) => {
   const allInstruments = await Instrument.find({}, 'name').exec();
 
