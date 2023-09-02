@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 #{title}: #{brand.name}
+  p= brand.country
+
+  if brand_instruments.length
+
+    p #[strong Delete the following instruments before attempting to delete this brand.]
+
+    div
+
+      h4 Instruments
+
+      dl
+      each instrument in brand_instruments
+        dt
+          a(href=instrument.url) #{instrument.title}
+        dd #{instrument.description}
+
+  else
+    p Do you really want to delete this brand?
+
+    form(method='POST' action='')
+      div.form-group
+        input#brandid.form-control(type='hidden',name='brandid', required='true', value=brand._id )
+
+      button.btn.btn-primary(type='submit') Delete
