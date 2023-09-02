@@ -87,3 +87,22 @@ exports.brand_delete_get = asyncHandler(async (req, res, next) => {
     brand_instruments: allInstrumentsByBrand,
   });
 });
+
+exports.brand_delete_post = asyncHandler(async (req, res, next) => {
+  const [brand, allInstrumentsByBrand] = await Promise.all([
+    Brand.findById(req.params.id).exec(),
+    Instrument.find({ brand: req.params.id }, 'name description').exec(),
+  ]);
+
+  if (allInstrumentsByBrand.length > 0) {
+    res.render('brand_delete', {
+      title: 'Delete Brand',
+      brand: brand,
+      brand_instruments: allInstrumentsByBrand,
+    });
+    return;
+  } else {
+    await Brand.findByIdAndRemove(req.body.brandid);
+    res.redirect('/brands');
+  }
+});

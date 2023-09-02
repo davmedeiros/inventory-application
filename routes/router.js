@@ -26,6 +26,7 @@ router.post('/item/create', item_controller.item_create_post);
 
 // Delete
 router.get('/brand/:id/delete', brand_controller.brand_delete_get);
+router.post('/brand/:id/delete', brand_controller.brand_delete_post);
 
 // Detail views
 router.get('/category/:id', category_controller.category_detail);
