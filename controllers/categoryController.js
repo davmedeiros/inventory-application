@@ -27,3 +27,7 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
     category_instruments: instrumentsInCategory,
   });
 });
+
+exports.category_create_get = (req, res, next) => {
+  res.render('category_form', { title: 'Create Category' });
+};
