@@ -16,3 +16,7 @@ block content
       span.text-warning #{item.status}
 
   p #[strong Added in: ] #{item.date_added}
+  p
+    a(href=item.url+'/delete') Delete item
+  p
+    a(href=item.url+'/update') Update item
