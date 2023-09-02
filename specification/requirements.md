@@ -11,5 +11,12 @@
 
 - [x] View category detail.
 - [x] View brand detail.
-- [ ] View instrument detail.
-- [ ] View inventory item detail.
+- [x] View instrument detail.
+- [x] View inventory item detail.
+
+## Create forms
+
+- [ ] Create category.
+- [ ] Create brand.
+- [ ] Create instrument.
+- [ ] Create inventory item.
