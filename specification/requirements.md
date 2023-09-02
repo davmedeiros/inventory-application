@@ -27,3 +27,10 @@
 - [x] Delete brand.
 - [ ] Delete instrument.
 - [ ] Delete inventory item.
+
+## Update
+
+- [ ] Delete category.
+- [ ] Delete brand.
+- [x] Delete instrument.
+- [ ] Delete inventory item.
