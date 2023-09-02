@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 Title: #{instrument.title}
+
+  p #[strong Brand:]
+    a(href=instrument.brand.url) #{instrument.brand.name}
+  p #[strong Description:] #{instrument.description}
+  p #[strong Category:]
+    a(href=instrument.category.url) #{instrument.category.name}
+
+  div
+    h4 In stock
+
+    each item in items
+      hr
+      if item.status=='Available'
+        p.text-success #{item.status}
+      else if item.status=='Sold'
+        p.text-danger #{item.status}
+      else
+        p.text-warning #{item.status}
+      p #[strong Id:]
+        a(href=item.url) #{item._id}
+
+    else
+      p There are no items in stock for this instrument.
+
+  hr
+  p
+    a(href=instrument.url+'/delete') Delete instrument
+  p
+    a(href=instrument.url+'/update') Update instrument
