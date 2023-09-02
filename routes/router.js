@@ -15,6 +15,6 @@ router.get('/items', item_controller.item_list);
 router.get('/category/:id', category_controller.category_detail);
 router.get('/brand/:id', brand_controller.brand_detail);
 router.get('/instrument/:id', instrument_controller.instrument_detail);
-// router.get('/item/:id', item_controller.item_detail);
+router.get('/item/:id', item_controller.item_detail);
 
 module.exports = router;
