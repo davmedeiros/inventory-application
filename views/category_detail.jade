@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 Category: #{category.name}
+
+  div
+
+    h4 Instruments
+
+    dl
+      each instrument in category_instruments
+        dt
+          a(href=instrument.url) #{instrument.name}
+        dd #{instrument.description}
+
+      else
+        p This genre has no instruments.
