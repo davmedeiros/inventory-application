@@ -103,3 +103,103 @@ exports.instrument_create_post = [
     }
   }),
 ];
+
+exports.instrument_update_get = asyncHandler(async (req, res, next) => {
+  const [instrument, allBrands, allCategories] = await Promise.all([
+    Instrument.findById(req.params.id)
+      .populate('brand')
+      .populate('category')
+      .exec(),
+    Brand.find().exec(),
+    Category.find().exec(),
+  ]);
+
+  if (instrument === null) {
+    const err = new Error('instrument not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  for (const category of allCategories) {
+    if (category._id.toString() === instrument.category._id.toString()) {
+      category.checked = 'true';
+    }
+  }
+
+  res.render('instrument_form', {
+    title: 'Update Instrument',
+    brands: allBrands,
+    categories: allCategories,
+    instrument: instrument,
+  });
+});
+
+exports.instrument_update_post = [
+  (req, res, next) => {
+    if (!(req.body.category instanceof Array)) {
+      if (typeof req.body.category === 'undefined') {
+        req.body.category = [];
+      } else {
+        req.body.category = new Array(req.body.category);
+      }
+    }
+    next();
+  },
+
+  body('name', 'Name must not be empty.').trim().isLength({ min: 1 }).escape(),
+  body('price', 'Price must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('brand', 'Brand must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('description', 'Description must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('category.*').escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const instrument = new Instrument({
+      name: req.body.name,
+      price: req.body.price,
+      brand: req.body.brand,
+      description: req.body.description,
+      category: req.body.category,
+      _id: req.params.id, // This is required, or a new ID will be assigned!
+    });
+
+    if (!errors.isEmpty()) {
+      const [allBrands, allCategories] = await Promise.all([
+        Brand.find().exec(),
+        Category.find().exec(),
+      ]);
+
+      for (const category of allCategories) {
+        if (instrument.category._id.toString() === category._id.toString()) {
+          category.checked = 'true';
+        }
+      }
+
+      res.render('instrument_form', {
+        title: 'Update instrument',
+        brands: allBrands,
+        categories: allCategories,
+        instrument: instrument,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const updatedInstrument = await Instrument.findByIdAndUpdate(
+        req.params.id,
+        instrument,
+        {}
+      );
+      res.redirect(updatedInstrument.url);
+    }
+  }),
+];

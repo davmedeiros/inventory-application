@@ -28,6 +28,16 @@ router.post('/item/create', item_controller.item_create_post);
 router.get('/brand/:id/delete', brand_controller.brand_delete_get);
 router.post('/brand/:id/delete', brand_controller.brand_delete_post);
 
+// Update
+router.get(
+  '/instrument/:id/update',
+  instrument_controller.instrument_update_get
+);
+router.post(
+  '/instrument/:id/update',
+  instrument_controller.instrument_update_post
+);
+
 // Detail views
 router.get('/category/:id', category_controller.category_detail);
 router.get('/brand/:id', brand_controller.brand_detail);
