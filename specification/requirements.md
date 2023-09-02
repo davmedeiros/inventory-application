@@ -18,5 +18,12 @@
 
 - [x] Create category.
 - [x] Create brand.
-- [ ] Create instrument.
-- [ ] Create inventory item.
+- [x] Create instrument.
+- [x] Create inventory item.
+
+## Delete
+
+- [ ] Delete category.
+- [ ] Delete brand.
+- [ ] Delete instrument.
+- [ ] Delete inventory item.
