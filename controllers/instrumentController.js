@@ -105,7 +105,10 @@ exports.instrument_create_post = [
 ];
 
 exports.instrument_delete_get = asyncHandler(async (req, res, next) => {
-  const instrument = await Instrument.findById(req.params.id).exec();
+  const [instrument, allItemsByInstrument] = await Promise.all([
+    Instrument.findById(req.params.id).exec(),
+    Item.find({ instrument: req.params.id }).exec(),
+  ]);
 
   if (instrument === null) {
     res.redirect('/instruments');
@@ -114,17 +117,27 @@ exports.instrument_delete_get = asyncHandler(async (req, res, next) => {
   res.render('instrument_delete', {
     title: 'Delete Instrument',
     instrument: instrument,
+    items: allItemsByInstrument,
   });
 });
 
 exports.instrument_delete_post = asyncHandler(async (req, res, next) => {
-  const instrument = await Instrument.findById(req.params.id).exec();
+  const [instrument, allItemsByInstrument] = await Promise.all([
+    Instrument.findById(req.params.id).exec(),
+    Item.find({ instrument: req.params.id }).exec(),
+  ]);
 
-  if (instrument) {
+  if (allItemsByInstrument.length > 0) {
+    res.render('instrument_delete', {
+      title: 'Delete Instrument',
+      instrument: instrument,
+      items: allItemsByInstrument,
+    });
+    return;
+  } else {
     await Instrument.findByIdAndRemove(req.body.instrumentid);
+    res.redirect('/instruments');
   }
-
-  res.redirect('/instruments');
 });
 
 exports.instrument_update_get = asyncHandler(async (req, res, next) => {

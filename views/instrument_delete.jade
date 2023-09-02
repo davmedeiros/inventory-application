@@ -4,9 +4,24 @@ block content
   h1 #{title}: #{instrument.name}
   p= instrument.description
 
-  p Do you really want to delete this instrument?
-  
-  form(method='POST' action='')
-    div.form-group
-      input#instrumentid.form-control(type='hidden',name='instrumentid', required='true', value=instrument._id )
-    button.btn.btn-primary(type='submit') Delete
+  if items.length
+
+    p #[strong Delete the following items before attempting to delete this instrument.]
+
+    div
+
+      h4 Items
+
+      dl
+      each item in items
+        dt
+          a(href=item.url) #{item._id}
+
+  else
+    p Do you really want to delete this instrument?
+
+    form(method='POST' action='')
+      div.form-group
+        input#instrumentid.form-control(type='hidden',name='instrumentid', required='true', value=instrument._id )
+
+      button.btn.btn-primary(type='submit') Delete
