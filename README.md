@@ -1,2 +1,1 @@
-# inventory-application
-TOP - Inventory Application
+# TOP - Educational Project - Inventory Application
