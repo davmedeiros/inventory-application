@@ -108,9 +108,50 @@ exports.brand_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.brand_update_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Brand update GET');
+  const brand = await Brand.findById(req.params.id).exec();
+
+  if (!brand) {
+    const err = new Error('brand not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render('brand_form', {
+    title: 'Update Brand',
+    category: brand,
+  });
 });
 
-exports.brand_update_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Brand update POST');
-});
+exports.brand_update_post = [
+  body('name', 'Name must not be empty.').trim().isLength({ min: 1 }).escape(),
+  body('country', 'Country must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const brand = new Brand({
+      name: req.body.name,
+      country: req.body.country,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render('brand_form', {
+        title: 'Update Brand',
+        brand: brand,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const updatedBrand = await Brand.findByIdAndUpdate(
+        req.params.id,
+        brand,
+        {}
+      );
+      res.redirect(updatedBrand.url);
+    }
+  }),
+];
