@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 ID: #{item._id}
+
+  p #[strong Name: ]
+    a(href=item.instrument.url) #{item.instrument.name}
+
+  p #[strong Status: ]
+    if item.status=='Available'
+      span.text-success #{item.status}
+    else if item.status=='Sold'
+      span.text-danger #{item.status}
+    else
+      span.text-warning #{item.status}
+
+  p #[strong Added on: ] #{item.date_added}
