@@ -31,6 +31,6 @@
 ## Update
 
 - [x] Update category.
-- [ ] Update brand.
+- [x] Update brand.
 - [x] Update instrument.
 - [ ] Update inventory item.
