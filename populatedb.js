@@ -8,10 +8,12 @@ const userArgs = process.argv.slice(2);
 const Category = require('./models/category');
 const Brand = require('./models/brand');
 const Instrument = require('./models/instrument');
+const Item = require('./models/item');
 
 const categories = [];
 const brands = [];
 const instruments = [];
+const items = [];
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
@@ -112,6 +114,26 @@ const populateInstrument = async () => {
   ]);
 };
 
+const createItem = async (index, instrument, status, date_added) => {
+  const item = new Item({
+    instrument: instrument,
+    status: status,
+    date_added: date_added,
+  });
+  await item.save();
+  items[index] = item;
+  console.log(`Added item`);
+};
+
+const populateItem = async () => {
+  console.log('Adding items');
+  await Promise.all([
+    createItem(0, instruments[0], 'Sold'),
+    createItem(0, instruments[1]),
+    createItem(0, instruments[2], 'Reserved'),
+  ]);
+};
+
 const main = async () => {
   console.log('Debug: About to connect');
   await mongoose.connect(mongoDB);
@@ -119,6 +141,7 @@ const main = async () => {
   await populateCategory();
   await populateBrand();
   await populateInstrument();
+  await populateItem();
   console.log('Debug: Closing mongoose');
   mongoose.connection.close();
 };
