@@ -11,7 +11,7 @@ block content
       label(for='price') Price:
       input#price.form-control(type='text', placeholder='4.42' name='price' required='true' value=(undefined===instrument ? '' : instrument.price) )
     div.form-group
-      label(for='brand') brand:
+      label(for='brand') Brand:
       select#brand.form-control(type='select', placeholder='Select brand' name='brand' required='true' )
         - brands.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for brand in brands
@@ -20,7 +20,7 @@ block content
           else
             option(value=brand._id) #{brand.name}
     div.form-group
-      label(for='description') description:
+      label(for='description') Description:
       textarea#description.form-control(type='textarea', placeholder='description' name='description' required='true') #{undefined===instrument ? '' : instrument.description}
     div.form-group
       label Category:
