@@ -67,3 +67,19 @@ exports.item_create_post = [
     }
   }),
 ];
+
+exports.item_delete_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Item delete GET');
+});
+
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Item delete POST');
+});
+
+exports.item_update_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Item update GET');
+});
+
+exports.item_update_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Item update POST');
+});

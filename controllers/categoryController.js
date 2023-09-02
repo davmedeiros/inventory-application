@@ -74,3 +74,19 @@ exports.category_create_post = [
     }
   }),
 ];
+
+exports.category_delete_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Category delete GET');
+});
+
+exports.category_delete_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Category delete POST');
+});
+
+exports.category_update_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Category update GET');
+});
+
+exports.category_update_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Category update POST');
+});

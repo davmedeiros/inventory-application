@@ -106,3 +106,11 @@ exports.brand_delete_post = asyncHandler(async (req, res, next) => {
     res.redirect('/brands');
   }
 });
+
+exports.brand_update_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Brand update GET');
+});
+
+exports.brand_update_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Brand update POST');
+});

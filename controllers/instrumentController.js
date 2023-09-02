@@ -104,6 +104,14 @@ exports.instrument_create_post = [
   }),
 ];
 
+exports.instrument_delete_get = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Instrument delete GET');
+});
+
+exports.instrument_delete_post = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Instrument delete POST');
+});
+
 exports.instrument_update_get = asyncHandler(async (req, res, next) => {
   const [instrument, allBrands, allCategories] = await Promise.all([
     Instrument.findById(req.params.id)
