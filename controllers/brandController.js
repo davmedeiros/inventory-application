@@ -27,3 +27,7 @@ exports.brand_detail = asyncHandler(async (req, res, next) => {
     brand_instruments: instrumentsInBrand,
   });
 });
+
+exports.brand_create_get = (req, res, next) => {
+  res.render('brand_form', { title: 'Create Brand' });
+};
