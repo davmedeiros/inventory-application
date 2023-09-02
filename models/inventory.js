@@ -12,6 +12,7 @@ const InventorySchema = new Schema({
     type: String,
     required: true,
     enum: ['Available', 'Reserved', 'Sold'],
+    default: 'Available',
   },
   date_added: { type: Date, default: Date.now },
 });
