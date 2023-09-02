@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+  h1= title 
+  ul 
+    each item in item_list
+      li 
+        a(href=item.url) #{item.instrument.name} 
+        if item.status=='Available'
+          span.text-success #{item.status}
+        else if item.status=='Sold'
+          span.text-danger #{item.status}
+        else
+          span.text-warning #{item.status}
+    else 
+      li There are no items.
