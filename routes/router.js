@@ -16,12 +16,12 @@ router.get('/items', item_controller.item_list);
 
 // Create
 router.get('/category/create', category_controller.category_create_get);
+router.post('/category/create', category_controller.category_create_post);
 
 // Detail views
 router.get('/category/:id', category_controller.category_detail);
 router.get('/brand/:id', brand_controller.brand_detail);
 router.get('/instrument/:id', instrument_controller.instrument_detail);
 router.get('/item/:id', item_controller.item_detail);
-// router.get('/category/create', category_controller.category_create_post);
 
 module.exports = router;
