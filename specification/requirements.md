@@ -33,4 +33,4 @@
 - [x] Update category.
 - [x] Update brand.
 - [x] Update instrument.
-- [ ] Update inventory item.
+- [x] Update inventory item.

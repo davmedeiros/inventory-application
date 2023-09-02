@@ -51,7 +51,7 @@ exports.item_create_post = [
     });
 
     if (!errors.isEmpty()) {
-      const allInstruments = await Instrument.find({}, 'title').exec();
+      const allInstruments = await Instrument.find({}, 'name').exec();
 
       res.render('item_form', {
         title: 'Create Item',
@@ -93,9 +93,54 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Item update GET');
+  const [item, allInstruments] = await Promise.all([
+    Item.findById(req.params.id).exec(),
+    Instrument.find().exec(),
+  ]);
+
+  if (!item) {
+    const err = new Error('item not found');
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render('item_form', {
+    title: 'Update Item',
+    item: item,
+    instrument_list: allInstruments,
+  });
 });
 
-exports.item_update_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Item update POST');
-});
+exports.item_update_post = [
+  body('instrument', 'Instrument must be specified')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('status').escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const item = new Item({
+      instrument: req.body.instrument,
+      status: req.body.status,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      const allInstruments = await Instrument.find({}, 'name').exec();
+
+      res.render('item_form', {
+        title: 'Update Item',
+        instrument_list: allInstruments,
+        selected_instrument: item.instrument._id,
+        errors: errors.array(),
+        item: item,
+      });
+      return;
+    } else {
+      const updatedItem = await Item.findByIdAndUpdate(req.params.id, item, {});
+      res.redirect(updatedItem.url);
+    }
+  }),
+];
