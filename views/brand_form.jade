@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Name:
+      input#name.form-control(type='text' placeholder='Yamaha' name='name' required='true' value=(undefined===brand ? '' : brand.name) )
+    div.form-group
+      label(for='country') Country:
+      input#country.form-control(type='text' placeholder='United States' name='country' required='true' value=(undefined===brand ? '' : brand.country))
+    button.btn.btn-primary(type='submit') Submit
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
