@@ -28,6 +28,7 @@ header {
   color: var(--color-default-light);
   display: grid;
   place-items: center;
+  font-weight: bold;
 }
 
 header li {
@@ -56,6 +57,44 @@ header menu {
   display: grid;
   grid-auto-flow: column;
   gap: 30px;
+}
+
+main {
+  padding: 30px;
+}
+
+form {
+  display: grid;
+  gap: 20px;
+}
+
+button {
+  border: none;
+  background-color: var(--color-success);
+  height: 50px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 11px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px 5px;
+  font-size: 1.2rem;
+}
+
+select:focus {
+  background-color: var(--color-default-light);
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.form-group {
+  display: grid;
 }
 
 .text-success {
