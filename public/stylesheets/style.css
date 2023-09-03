@@ -61,6 +61,8 @@ header menu {
 
 main {
   padding: 30px;
+  display: grid;
+  gap: 20px;
 }
 
 form {
@@ -82,6 +84,36 @@ input,
 select,
 textarea {
   padding: 10px 5px;
+  font-size: 1.2rem;
+}
+
+a {
+  color: var(--color-beta);
+}
+
+p {
+  margin: 20px 0;
+}
+
+p > a {
+  border: 3px solid var(--color-alpha);
+  background-color: var(--color-alpha);
+  color: var(--color-default-light);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 11px;
+}
+
+p > a:hover {
+  background-color: var(--color-default-light);
+  color: var(--color-alpha);
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
   font-size: 1.2rem;
 }
 
